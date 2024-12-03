@@ -16,11 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from casas.views import CasaViewSet
+from rest_framework.routers import SimpleRouter
+from .views import PerfilMoradorViewSet, UnidadeViewSet
+
+router = SimpleRouter()
+router.register("perfis", PerfilMoradorViewSet, basename="perfis")
+router.register("unidades", UnidadeViewSet, basename="unidades")
+router.register("casas", CasaViewSet, basename="casas")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/moradores/', include('apps.moradores.urls')),
-    path('api/unidades/', include('apps.unidades.urls')),
-    path('api/financeiro/', include('apps.financeiro.urls')),
+    #path('api/unidades/', include('apps.unidades.urls')),
+    #path('api/financeiro/', include('apps.financeiro.urls')),
+    path('api/usuarios/', include('apps.usuarios.urls')),
+    path('api/casas/', include('apps.casas.urls')),
 ]
-
